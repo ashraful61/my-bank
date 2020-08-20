@@ -89,7 +89,7 @@
             // const currentBalance = document.getElementById("currentBalance").innerText;
             // const currentBalanceNumber = parseFloat(currentBalance);
             // document.getElementById("currentBalance").innerText = depositeNumber + currentBalanceNumber;
-            document.getElementById("depositeAmount").value = "";
+               document.getElementById("depositeAmount").value = "";
         })
            
 
@@ -115,12 +115,12 @@
         })
 
            
-        function  updateSpanText(id,depositeNumber){            
+        function  updateSpanText(id,addedNumber){            
             const current = document.getElementById(id).innerText;
             const currentNumber = parseFloat(current);
-            const totalAmount =  depositeNumber + currentNumber
+            const totalAmount =  addedNumber + currentNumber
             document.getElementById(id).innerText = totalAmount;
-        //     document.getElementById(id).innerText = totalAmount;
+              //     document.getElementById(id).innerText = totalAmount;
         //   if(id === "currentDeposite" || id === "currentBalance"){
         //     const totalAmount =  depositeNumber + currentNumber
         //     document.getElementById(id).innerText = totalAmount;
@@ -135,7 +135,6 @@
                   
         //       }
         //   }
-           
              }
         function getInputNumber(id){
             const amount = document.getElementById(id).value;
