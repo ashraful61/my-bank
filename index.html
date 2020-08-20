@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Bank</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    
+    <div id="login-area">
+        <h1 class="text-center">Welcome To My Bank</h1>
+        <div class="submit-area">
+            <h4>Log In</h4>
+            <input class="form-control" type="text" name="" id="" placeholder="Email"><br>
+            <input class="form-control" type="password" name="" id="" placeholder="password"><br>
+            <button id = "submit" type="submit" class="btn btn-success">Submit</button>
+        </div>
+    </div>
+
+     <div id="transaction-area">
+        <h1 class="text-center" style="margin-bottom: 50px;">Transaction Area</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="deposite status">
+                    <h5>Deposite</h5>
+                    <h2>$ <span id="currentDeposite">00</span> </h2>
+                </div>
+                
+            </div>
+            <div class="col-md-4">
+                <div class="withdraw status">
+                    <h5>Withdraw</h5>
+                    <h2>$ <span id="currentWithdraw">00</span> </h2>
+                </div>
+              
+            </div>
+            <div class="col-md-4">
+                <div class="balance status">
+                    <h5>Balance</h5>
+                    <h2>$ <span id="currentBalance">1200</span> </h2>
+                </div>              
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 submit-area">
+                <h4>Deposit</h4>
+                <input id="depositeAmount" type="text" class="form-control" placeholder="Amount you want to deposite"><br>
+                <button id="adddeposite" class="btn btn-success">Deosite</button>
+            </div>
+            <div class="col-md-6 submit-area">
+                <h4>Withdraw</h4>
+                <input id="withdrawAmount" type="text" class="form-control" placeholder="Amount you want to withdraw"><br>
+                <button id="addwithdraw" class="btn btn-success">Withdraw</button>
+            </div>
+        </div>
+     </div>
+
+    <script>
+            //Submit button  Eevent Handler 
+           const submitBtn = document.getElementById("submit");
+            submitBtn.addEventListener('click',function(){
+            const loginArea = document.getElementById("login-area");
+            loginArea.style.display = "none";
+            const transactionArea = document.getElementById("transaction-area");
+            transactionArea.style.display = "block";
+            });
+
+           //Deposite Button Event Handler
+            const depositeBtn = document.getElementById("adddeposite");
+            depositeBtn.addEventListener('click',function(){
+            const depositeNumber = getInputNumber("depositeAmount");
+            console.log("depositeAmount:", depositeNumber)
+            if(depositeNumber <= 0){
+                alert("Your input is invalid")
+            }
+            else{
+                updateSpanText("currentDeposite", depositeNumber);
+                updateSpanText("currentBalance", depositeNumber);
+            }
+        
+            // const depositeAmount = document.getElementById("depositeAmount").value;
+            // const depositeNumber = parseFloat(depositeAmount);
+            // const currentDeposite = document.getElementById("currentDeposite").innerText;
+            // const currentDepositeNumber = parseFloat(currentDeposite);
+            // document.getElementById("currentDeposite").innerText = depositeNumber + currentDepositeNumber;
+            // const currentBalance = document.getElementById("currentBalance").innerText;
+            // const currentBalanceNumber = parseFloat(currentBalance);
+            // document.getElementById("currentBalance").innerText = depositeNumber + currentBalanceNumber;
+            document.getElementById("depositeAmount").value = "";
+        })
+           
+
+        //Withdraw Button Event Handler
+        const withdrawBtn = document.getElementById("addwithdraw");
+        withdrawBtn.addEventListener('click',function(){
+            const withdrawNumber = getInputNumber("withdrawAmount");
+            console.log("withdrawNumber:", withdrawNumber);
+            if ( withdrawNumber <= 0){
+                alert("Your input is invalid")
+            }
+         else{
+            updateSpanText("currentWithdraw", withdrawNumber);
+            updateSpanText("currentBalance", -1*withdrawNumber)
+         }
+            // const currentWithdraw = document.getElementById("currentWithdraw").innerText;
+            // const currentWithdrawNumber = parseFloat(currentWithdraw);
+            // document.getElementById("currentWithdraw").innerText = withdrawNumber + currentWithdrawNumber;
+            // const currentBalance = document.getElementById("currentBalance").innerText;
+            // const currentBalanceNumber = parseFloat(currentBalance);
+            // document.getElementById("currentBalance").innerText = (-1*withdrawNumber) + currentBalanceNumber;
+            document.getElementById("withdrawAmount").value = "";
+        })
+
+           
+        function  updateSpanText(id,depositeNumber){            
+            const current = document.getElementById(id).innerText;
+            const currentNumber = parseFloat(current);
+            const totalAmount =  depositeNumber + currentNumber
+            document.getElementById(id).innerText = totalAmount;
+        //     document.getElementById(id).innerText = totalAmount;
+        //   if(id === "currentDeposite" || id === "currentBalance"){
+        //     const totalAmount =  depositeNumber + currentNumber
+        //     document.getElementById(id).innerText = totalAmount;
+        //   }
+        //   else{
+        //       if(depositeNumber <= parseFloat(document.getElementById("currentBalance").innerText)){
+        //         const totalAmount =  depositeNumber + currentNumber
+        //         document.getElementById(id).innerText = totalAmount;
+        //       }
+        //       else{
+        //           alert("Insufficient balance")
+                  
+        //       }
+        //   }
+           
+             }
+        function getInputNumber(id){
+            const amount = document.getElementById(id).value;
+            const amountNumber = parseFloat(amount);
+            return amountNumber;
+        }
+
+
+
+    </script>
+
+
+</body>
+</html>
